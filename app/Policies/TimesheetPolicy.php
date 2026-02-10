@@ -103,6 +103,6 @@ class TimesheetPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_timesheet');
+        return $user->can('{{ Reorder }}');
     }
 }

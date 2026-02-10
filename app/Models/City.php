@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Altwaireb\CountriesStatesCities\Models\City as Model;
+use Altwaireb\World\Models\City as Model;
+use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @method static Builder query()
+ */
 class City extends Model
 {
     //

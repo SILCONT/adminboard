@@ -12,7 +12,7 @@
         "altwaireb/laravel-world": "^1.0",
         "barryvdh/laravel-dompdf": "^2.1",
         "bezhansalleh/filament-panel-switch": "^1.0",
-        "bezhansalleh/filament-shield": "^3.2",
+        "bezhansalleh/filament-shield": "^3.9",
         "eightynine/filament-excel-import": "^3.0",
         "filament/filament": "^3.2",
         "flowframe/laravel-trend": "^0.2.0",

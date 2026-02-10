@@ -103,6 +103,6 @@ class HolidayPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_holiday');
+        return $user->can('{{ Reorder }}');
     }
 }

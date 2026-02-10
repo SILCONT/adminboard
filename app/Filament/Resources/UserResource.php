@@ -11,6 +11,7 @@ use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,8 +21,25 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Illuminate\Support\Collection;
 
-class UserResource extends Resource
+class UserResource extends Resource implements HasShieldPermissions
 {
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'restore',
+            'restore_any',
+            'replicate',
+        ];
+    }
+
     protected static ?string $model = User::class;
     protected static ?string $navigationLabel = 'Employees';
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
@@ -62,8 +80,7 @@ class UserResource extends Resource
                     } )
                     ->required(),
                     Forms\Components\Select::make('state_id')
-                    ->options(fn (Get $get): Collection => State::query()
-                        ->where('country_id', $get('country_id'))
+                    ->options(fn (Get $get): Collection => State::query()->where('country_id', $get('country_id'))
                         ->pluck('name','id'))
                     ->searchable()
                     ->preload()
@@ -71,8 +88,7 @@ class UserResource extends Resource
                     ->afterStateUpdated(fn (Set $set) =>$set('city_id',null))
                     ->required(),
                     Forms\Components\Select::make('city_id')
-                    ->options(fn (Get $get): Collection => City::query()
-                        ->where('state_id', $get('state_id'))
+                    ->options(fn (Get $get): Collection => City::query()->where('state_id', $get('state_id'))
                         ->pluck('name','id'))
                     ->searchable()
                     ->preload()
